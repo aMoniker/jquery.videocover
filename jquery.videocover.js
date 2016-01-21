@@ -3,8 +3,8 @@
 $.fn.videocover = function(args) {
     var $this = $(this);
 
-    if (!$this.is('video')) {
-        throw new Error('element must be a video');
+    if (!$this.is('video') && !$this.is('iframe')) {
+        throw new Error('element must be a video or iframe');
     }
 
     var args = $.extend({
@@ -38,7 +38,7 @@ $.fn.videocover = function(args) {
         if (scale * args.width < args.minWidth) { scale = args.minWidth / args.width; }
 
         // some plugins replace the <video> element with an <embed> element
-        var $video = $viewport.find('video, embed');
+        var $video = $viewport.find('video, embed, iframe');
 
         // scale and center the video within the viewport
         $video.width(scale * args.width)
